@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://user-management-system-zqmt.onrender.com'
+    apiUrl: 'https://intprog-user-management-tr2z.onrender.com'
   };
   
