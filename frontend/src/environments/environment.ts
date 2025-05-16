@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: ''
+    apiUrl: 'https://intprog-user-management-tr2z.onrender.com'
   };
   
   /*
