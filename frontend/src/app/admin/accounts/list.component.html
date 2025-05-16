@@ -34,30 +34,31 @@
       <td style="white-space: nowrap">
         <a routerLink="edit/{{ account.id }}" class="btn btn-sm btn-primary mr-1">Edit</a>
 
-        <!-- Dropdown for Deactivate / Activate -->
-        <div ngbDropdown class="d-inline-block">
-          <button class="btn btn-sm" ngbDropdownToggle [disabled]="account.isDeactivating || account.isActivating">
+        <!-- Status dropdown -->
+        <div class="dropdown d-inline-block">
+          <button class="btn btn-sm" 
+                  [ngClass]="{'btn-success': account.isActive, 'btn-warning': !account.isActive}"
+                  type="button" 
+                  data-bs-toggle="dropdown" 
+                  aria-expanded="false"
+                  [disabled]="account.isDeactivating || account.isActivating">
             <span *ngIf="account.isDeactivating || account.isActivating" class="spinner-border spinner-border-sm"></span>
-            <span *ngIf="!account.isDeactivating && !account.isActivating">
-              {{ account.isActive ? 'Deactivate' : 'Activate' }}
-            </span>
+            <span *ngIf="!(account.isDeactivating || account.isActivating)">{{ account.isActive ? 'Active' : 'Inactive' }}</span>
           </button>
-          <div ngbDropdownMenu class="dropdown-menu">
-            <button 
-              class="dropdown-item" 
-              (click)="deactivateAccount(account.id)" 
-              [disabled]="!account.isActive || account.isDeactivating"
-              [class.disabled]="account.isDeactivating">
-              Deactivate
-            </button>
-            <button 
-              class="dropdown-item" 
-              (click)="activateAccount(account.id)" 
-              [disabled]="account.isActive || account.isActivating"
-              [class.disabled]="account.isActivating">
-              Activate
-            </button>
-          </div>
+          <ul class="dropdown-menu">
+            <li *ngIf="account.isActive">
+              <a class="dropdown-item" (click)="deactivateAccount(account.id)" [class.disabled]="account.isDeactivating">
+                <span *ngIf="account.isDeactivating" class="spinner-border spinner-border-sm me-1"></span>
+                Deactivate
+              </a>
+            </li>
+            <li *ngIf="!account.isActive">
+              <a class="dropdown-item" (click)="activateAccount(account.id)" [class.disabled]="account.isActivating">
+                <span *ngIf="account.isActivating" class="spinner-border spinner-border-sm me-1"></span>
+                Activate
+              </a>
+            </li>
+          </ul>
         </div>
       </td>
     </tr>
