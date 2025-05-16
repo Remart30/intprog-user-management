@@ -34,27 +34,31 @@
       <td style="white-space: nowrap">
         <a routerLink="edit/{{ account.id }}" class="btn btn-sm btn-primary mr-1">Edit</a>
 
-        <!-- Deactivate button -->
-        <button 
-          (click)="deactivateAccount(account.id)" 
-          class="btn btn-sm btn-warning mr-1" 
-          [disabled]="!account.isActive || account.isDeactivating"
-          [class.disabled]="account.isDeactivating"
-          aria-label="Deactivate account">
-          <span *ngIf="account.isDeactivating" class="spinner-border spinner-border-sm"></span>
-          <span *ngIf="!account.isDeactivating">Deactivate</span>
-        </button>
-
-        <!-- Activate button -->
-        <button 
-          (click)="activateAccount(account.id)" 
-          class="btn btn-sm btn-success" 
-          [disabled]="account.isActive || account.isActivating"
-          [class.disabled]="account.isActivating"
-          aria-label="Activate account">
-          <span *ngIf="account.isActivating" class="spinner-border spinner-border-sm"></span>
-          <span *ngIf="!account.isActivating">Activate</span>
-        </button>
+        <!-- Dropdown for Deactivate / Activate -->
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-sm" ngbDropdownToggle [disabled]="account.isDeactivating || account.isActivating">
+            <span *ngIf="account.isDeactivating || account.isActivating" class="spinner-border spinner-border-sm"></span>
+            <span *ngIf="!account.isDeactivating && !account.isActivating">
+              {{ account.isActive ? 'Deactivate' : 'Activate' }}
+            </span>
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <button 
+              class="dropdown-item" 
+              (click)="deactivateAccount(account.id)" 
+              [disabled]="!account.isActive || account.isDeactivating"
+              [class.disabled]="account.isDeactivating">
+              Deactivate
+            </button>
+            <button 
+              class="dropdown-item" 
+              (click)="activateAccount(account.id)" 
+              [disabled]="account.isActive || account.isActivating"
+              [class.disabled]="account.isActivating">
+              Activate
+            </button>
+          </div>
+        </div>
       </td>
     </tr>
   </tbody>
