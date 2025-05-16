@@ -37,7 +37,7 @@
         <!-- Deactivate button -->
         <button 
           (click)="deactivateAccount(account.id)" 
-          class="btn btn-sm btn-danger mr-1" 
+          class="btn btn-sm btn-secondary mr-1" 
           [disabled]="!account.isActive || account.isDeactivating"
           [class.disabled]="account.isDeactivating"
           aria-label="Deactivate account">
@@ -48,7 +48,7 @@
         <!-- Activate button -->
         <button 
           (click)="activateAccount(account.id)" 
-          class="btn btn-sm btn-info" 
+          class="btn btn-sm btn-primary" 
           [disabled]="account.isActive || account.isActivating"
           [class.disabled]="account.isActivating"
           aria-label="Activate account">
